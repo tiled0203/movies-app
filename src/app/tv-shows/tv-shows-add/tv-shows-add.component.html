@@ -1,0 +1,8 @@
+<div class="container">
+  <app-search (searched)="search($event)"></app-search>
+  <ul class="collection">
+    <li class="collection-item avatar" *ngFor="let tvShow of tvShows">
+      <app-movie [movie]="tvShow" (selected)="save(tvShow)"></app-movie>
+    </li>
+  </ul>
+</div>

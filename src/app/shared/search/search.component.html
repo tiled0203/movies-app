@@ -1,0 +1,9 @@
+<div>
+  <div class="input-field">
+    <input id="title"
+           type="text"
+           name="movieTitle"
+           (input)="search$.next($event.target.value)" />
+    <label for="title">Media Title</label>
+  </div>
+</div>
