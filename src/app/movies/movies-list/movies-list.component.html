@@ -1,4 +1,14 @@
-<ul class="collection">
+<div class="switch">
+  <!--  added switch to show private or public collection-->
+
+  <label>
+    Show private collection
+    <input type="checkbox" [(ngModel)]="isPublic" (change)="loadMovies()">
+    <span class="lever"></span>
+    Show public collection
+  </label>
+</div>
+<ul class="collection" >
   <li class="collection-item" *ngFor="let movie of movies">
     <app-media [media]="movie" (selected)="onClick(movie.id)"></app-media>
   </li>

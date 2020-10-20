@@ -1,8 +1,17 @@
 <div class="container">
   <app-search (searched)="search($event)"></app-search>
+<!--  added switch to show private or public collection-->
+  <div class="switch">
+    <label>
+      Add to private collection
+      <input type="checkbox" [(ngModel)]="isPublic">
+      <span class="lever"></span>
+      Add to public collection
+    </label>
+  </div>
   <ul class="collection">
     <li class="collection-item avatar" *ngFor="let movie of movies">
-      <app-movie [movie]="movie" (selected)="save(movie)"></app-movie>
+      <app-media [media]="movie" (selected)="save(movie)"></app-media>
     </li>
   </ul>
 </div>

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Movie} from '../model/movie.model';
 import {environment} from '../../environments/environment';
@@ -8,18 +8,28 @@ import {Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class MoviesService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
-  getMovies(): Observable<Movie[]> {
-    return this.http.get<Movie[]>(`${environment.apiUrl}/movies`);
+  getMovies(isPublic: boolean): Observable<Movie[]> {
+    return this.http.get<Movie[]>(`${environment.apiUrl}/movies`, {
+      params: {
+        public: isPublic.toString(),
+      },
+    });
   }
 
   getMovie(id: string): Observable<Movie> {
     return this.http.get<Movie>(`${environment.apiUrl}/movies/${id}`);
   }
 
-  addMovie(onlineId: string): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/movies`, {appId: onlineId});
+  addMovie(onlineId: number, addToPublic: boolean): Observable<Movie> {
+    // typo appId needs to be apiId otherwise you get a cors exception
+    return this.http.post<Movie>(`${environment.apiUrl}/movies`, {apiId: onlineId}, {
+      params: {
+        public: addToPublic.toString(),
+      },
+    });
   }
 
   lookUpMovie(title: string): Observable<any> {

@@ -6,6 +6,6 @@ export interface Movie {
   plot?: string;
   poster: string;
   rating?: number;
-  onlineId?: string;
+  onlineId?: number;
   seen?: boolean;
 }

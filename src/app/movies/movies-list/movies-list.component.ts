@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Movie} from '../../model/movie.model';
 import {MoviesService} from '../movies.service';
 import {Router} from '@angular/router';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-movies-list',
@@ -10,15 +11,23 @@ import {Router} from '@angular/router';
 })
 export class MoviesListComponent implements OnInit {
   movies: Movie[];
-  constructor(private movieService: MoviesService, private router: Router) { }
+  isPublic = false;
+
+  constructor(private movieService: MoviesService, private router: Router) {
+  }
 
   ngOnInit(): void {
-    this.movieService.getMovies().subscribe((m: Movie[]) => {
-      this.movies = m;
-      console.log(m);
-    });
+    this.loadMovies();
   }
+
   onClick(id: any): void {
     this.router.navigate(['/movies/' + id]);
+  }
+
+  // load movies when pub/priv switch changes
+  loadMovies(): void {
+    this.movieService.getMovies(this.isPublic).subscribe((m: Movie[]) => {
+      this.movies = m;
+    });
   }
 }

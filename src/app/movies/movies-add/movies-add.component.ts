@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Movie} from '../../model/movie.model';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {MoviesService} from '../movies.service';
 
 @Component({
@@ -10,7 +10,9 @@ import {MoviesService} from '../movies.service';
 })
 export class MoviesAddComponent implements OnInit {
   movies: Movie[];
-  constructor(private route: ActivatedRoute, private movieService: MoviesService) {
+  isPublic = false;
+
+  constructor(private route: ActivatedRoute, private movieService: MoviesService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -25,9 +27,10 @@ export class MoviesAddComponent implements OnInit {
   }
 
   save(movie: Movie): void {
-    this.movieService.addMovie(movie.onlineId).subscribe(res => {
+    this.movieService.addMovie(movie.onlineId, this.isPublic).subscribe(res => {
       console.log('movie added!');
-      console.log(res);
+      // navigate to details when you get a response
+      this.router.navigate(['/movies', res.id]);
     });
   }
 }

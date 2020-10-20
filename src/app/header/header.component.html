@@ -3,7 +3,8 @@
     <div>
       <a href="#" class="brand-logo">Movies App</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a routerLink="/movies/add"> Add Movie</a></li>
+        <li><a [routerLink]="['/movies/add']"> Add Movie</a></li>
+        <li><a [routerLink]="['/movies']"> Show Movie</a></li>
       </ul>
     </div>
   </nav>

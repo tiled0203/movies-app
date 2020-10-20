@@ -12,7 +12,6 @@ export class MediaComponent implements OnInit {
 
   @Output() selected = new EventEmitter<Movie | TvShow>();
   constructor() {
-    console.log('test)');
   }
 
   ngOnInit(): void {
